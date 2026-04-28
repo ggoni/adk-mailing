@@ -4,3 +4,4 @@
 [GOTCHA] pytest needs PYTHONPATH=. or empty __init__.py files in root folders (like app/ and tests/) to locate modules correctly.
 [DECISION] Switched from generating synthetic RFM data to ingesting the provided `g2_campana_email.csv` file for clustering.
 [GOTCHA] Changing `schema.sql` requires rebuilding the PostgreSQL container volume (`docker-compose down -v`) to trigger the init script again.
+[DECISION] Used JSONB format in PostgreSQL for centroid features instead of hardcoding columns. This ensures schema scalability and easy data transport to LLM agents.
