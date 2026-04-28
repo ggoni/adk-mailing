@@ -102,7 +102,7 @@ graph TD
 
 ### 7.2. Input/Output Data Flow
 ```mermaid
-flowchart LR
+flowchart TD
     A[Raw Data<br>g2_campana_email.csv] -->|seed_data.py| B[(customers table)]
     B -->|Features: Age, Income, Limits| C(DBSCAN Clustering)
     C -->|Centroid JSON| D[(clusters_summary table)]
