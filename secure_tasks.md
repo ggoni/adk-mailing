@@ -3,23 +3,22 @@
 ## 1. Threat Model (Data Flow with Trust Boundaries)
 ```mermaid
 flowchart TD
-    subgraph External Network (Untrusted)
-        OR[OpenRouter API]
-        Client[Internal Client]
+    subgraph untrusted ["External Network (Untrusted)"]
+        OR["OpenRouter API"]
+        Client["Internal Client"]
     end
 
-    subgraph Corporate Network (Trust Boundary)
-        subgraph Docker Bridge Network
-            API[FastAPI Container<br>Alpine/Non-Root]
-            DB[(PostgreSQL Container)]
+    subgraph corporate ["Corporate Network (Trust Boundary)"]
+        subgraph docker ["Docker Bridge Network"]
+            API["FastAPI Container<br>Alpine/Non-Root"]
+            DB["PostgreSQL Container"]
         end
     end
 
-    Client -- HTTPS / API Key --> API
-    API -- "SQLAlchemy (Internal DNS)" --> DB
-    API -- "HTTPS (TLS 1.3) + Bearer Token" --> OR
+    Client -->|"HTTPS / API Key"| API
+    API -->|"SQLAlchemy (Internal DNS)"| DB
+    API -->|"HTTPS (TLS 1.3) + Bearer Token"| OR
     
-    %% Threats
     style OR fill:#f9f,stroke:#333,stroke-width:2px
     style Client fill:#f9f,stroke:#333,stroke-width:2px
 ```
