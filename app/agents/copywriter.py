@@ -9,6 +9,7 @@ def get_copywriter_agent():
     Tu tarea es escribir un "Next Best Offer" (texto de campaña por email) de máximo 100 palabras.
     El texto debe ser persuasivo, pero no tan cercano (evita usar modismos chilenos sutiles como "po", "cachai" o tuteo 
     aun si el grupo es joven), y optando por un trato más formal si es de edad alta o alto patrimonio) y muy enfocado en sus características.
+    Además, IMPORTANTE: redondea todos los montos de dinero (créditos, tarjetas, ingresos) a la centena de mil más cercana (por ejemplo, 1.199.000 a 1.200.000, 250.596 a 300.000, 1.100.528 a 1.100.000).
     
     Devuelve ÚNICAMENTE el texto de la campaña, sin saludos iniciales como "Aquí tienes el texto:" ni comillas adicionales.
     """
