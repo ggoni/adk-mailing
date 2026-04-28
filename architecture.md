@@ -65,3 +65,48 @@ OPENROUTER_API_KEY=sk-or-v1-xxxxxxxxxxxxxxxxx
 **Clear answer:** Modular architecture defined using FastAPI, PostgreSQL, DBSCAN for deterministic clustering, and Google ADK orchestrating OpenRouter via `LiteLlm`.
 **Confidence level:** High. All requested components and tools fit smoothly under this modern design pattern.
 **Key caveats:** `scikit-learn` in Docker ARM (M3) environments occasionally requires C++ build dependencies. It is preferable to use binary distributions (wheels) installed via `uv` to avoid long compilation times. ADK is a recent framework; the official `google.adk` version must be used to ensure `LiteLlm` support.
+
+---
+
+## 7. System Diagrams
+
+### 7.1. Module & Service Interactions
+```mermaid
+graph TD
+    subgraph Data Layer
+        DB[(PostgreSQL)]
+    end
+    
+    subgraph FastAPI Backend
+        API[API Endpoints]
+        CS[Clustering Service]
+        OS[Orchestrator Service]
+    end
+    
+    subgraph AI Layer
+        ADK[ADK LlmAgent]
+        LLM[OpenRouter / LiteLLM]
+    end
+    
+    API -->|POST /run| CS
+    CS -->|Fetch Customers| DB
+    CS -->|Write Centroids| DB
+    API -->|Await| OS
+    OS -->|Read Centroids| DB
+    OS -->|Invoke Runner| ADK
+    ADK -->|API Call| LLM
+    LLM -->|Generated Copy| ADK
+    ADK -->|Return Result| OS
+    OS -->|Save Campaign| DB
+```
+
+### 7.2. Input/Output Data Flow
+```mermaid
+flowchart LR
+    A[Raw Data<br>g2_campana_email.csv] -->|seed_data.py| B[(customers table)]
+    B -->|Features: Age, Income, Limits| C(DBSCAN Clustering)
+    C -->|Centroid JSON| D[(clusters_summary table)]
+    D -->|Segment Profile + Prompt| E(Google ADK Agent)
+    E -->|Formal Copy + Rounded Numbers| F[(campaign_copy table)]
+    F -->|JSON Response| G[GET /campaign/results]
+```
