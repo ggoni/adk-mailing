@@ -2,3 +2,5 @@
 [2026-04-28 17:51] State configuration: [created GEMINI.md state hub]
 [GOTCHA] The pip package for Google ADK is 'google-adk', not 'adk-python'.
 [GOTCHA] pytest needs PYTHONPATH=. or empty __init__.py files in root folders (like app/ and tests/) to locate modules correctly.
+[DECISION] Switched from generating synthetic RFM data to ingesting the provided `g2_campana_email.csv` file for clustering.
+[GOTCHA] Changing `schema.sql` requires rebuilding the PostgreSQL container volume (`docker-compose down -v`) to trigger the init script again.
