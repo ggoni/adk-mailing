@@ -5,3 +5,4 @@
 [DECISION] Switched from generating synthetic RFM data to ingesting the provided `g2_campana_email.csv` file for clustering.
 [GOTCHA] Changing `schema.sql` requires rebuilding the PostgreSQL container volume (`docker-compose down -v`) to trigger the init script again.
 [DECISION] Used JSONB format in PostgreSQL for centroid features instead of hardcoding columns. This ensures schema scalability and easy data transport to LLM agents.
+[GOTCHA] Installing `google-adk[extensions]` with uv crashed due to llama-index pandas requirement conflicts. Fixed by installing `litellm` directly, bypassing the bloat but restoring OpenRouter support in ADK.
