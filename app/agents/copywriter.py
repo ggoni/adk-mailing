@@ -14,7 +14,7 @@ def get_copywriter_agent():
     """
     
     agent = LlmAgent(
-        model=LiteLlm(model="openrouter/anthropic/claude-3.5-sonnet"),
+        model=LiteLlm(model="qwen/qwen3.6-flash"),
         name="CopywriterAgent",
         instruction=instruction,
         description="Generates marketing copy in Chilean Spanish based on cluster features.",
