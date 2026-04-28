@@ -3,8 +3,9 @@ from app.db.database import SessionLocal
 from scripts.seed_data import seed_database
 
 def test_seed_data_populates_customers():
-    # Run the seed function
-    seed_database()
+    import os
+    csv_path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "data", "g2_campana_email.csv")
+    seed_database(csv_path)
     
     db = SessionLocal()
     try:
