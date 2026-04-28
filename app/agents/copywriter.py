@@ -1,6 +1,5 @@
 from google.adk.agents import LlmAgent
 from google.adk.models.lite_llm import LiteLlm
-from app.core.config import settings
 
 def get_copywriter_agent():
     instruction = """

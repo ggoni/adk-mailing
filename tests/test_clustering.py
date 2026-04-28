@@ -1,4 +1,3 @@
-import pytest
 from sqlalchemy import text
 from app.db.database import SessionLocal
 from app.services.clustering import ClusteringService
@@ -7,6 +6,7 @@ def test_clustering_runs_and_updates_db():
     service = ClusteringService()
     # Using a high eps to ensure some clusters form with standard scaler
     num_clusters = service.run_clustering(eps=2.0, min_samples=5)
+    assert num_clusters >= 0
     
     db = SessionLocal()
     try:

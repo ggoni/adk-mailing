@@ -1,4 +1,3 @@
-import pytest
 from sqlalchemy import text
 from app.db.database import SessionLocal
 from scripts.seed_data import seed_database

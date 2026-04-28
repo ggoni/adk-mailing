@@ -1,6 +1,5 @@
 import json
 import pandas as pd
-import numpy as np
 from sqlalchemy import text
 from sklearn.preprocessing import StandardScaler
 from sklearn.impute import SimpleImputer
@@ -18,7 +17,7 @@ class ClusteringService:
             'oferta_tc_limite_clp'
         ]
 
-    def run_clustering(self, eps=2.0, min_samples=5):
+    def run_clustering(self, eps=0.5, min_samples=5):
         db = SessionLocal()
         try:
             # 1. Fetch data
