@@ -7,3 +7,4 @@
 [DECISION] Used JSONB format in PostgreSQL for centroid features instead of hardcoding columns. This ensures schema scalability and easy data transport to LLM agents.
 [GOTCHA] Installing `google-adk[extensions]` with uv crashed due to llama-index pandas requirement conflicts. Fixed by installing `litellm` directly, bypassing the bloat but restoring OpenRouter support in ADK.
 [GOTCHA] Mocking ADK `InMemorySessionService.get_session` is an effective strategy in tests to inject dummy `campaign_copy` into state, circumventing `Runner` internals.
+[DECISION] Used `TestClient` for FastAPI and fully mocked the heavy services (Clustering and Orchestrator) to keep E2E tests fast and isolated from actual LLM network calls.
