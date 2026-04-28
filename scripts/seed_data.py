@@ -1,5 +1,6 @@
 import os
 import sys
+import argparse
 import pandas as pd
 from sqlalchemy import text
 
@@ -7,13 +8,15 @@ from sqlalchemy import text
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from app.db.database import SessionLocal
 
-def seed_database():
+def seed_database(csv_path):
     db = SessionLocal()
     try:
         # Idempotency: clear existing data
         db.execute(text("TRUNCATE customers RESTART IDENTITY CASCADE;"))
         
-        csv_path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "g2_campana_email.csv")
+        if not os.path.exists(csv_path):
+            raise FileNotFoundError(f"Archivo de datos no encontrado: {csv_path}")
+            
         df = pd.read_csv(csv_path)
         
         # Insert data
@@ -62,4 +65,8 @@ def seed_database():
         db.close()
 
 if __name__ == "__main__":
-    seed_database()
+    parser = argparse.ArgumentParser(description="Seed database with customer data.")
+    parser.add_argument("--file", "-f", required=True, help="Ruta al archivo CSV de clientes.")
+    args = parser.parse_args()
+    
+    seed_database(args.file)

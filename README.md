@@ -13,7 +13,7 @@ API de marketing que agrupa a los clientes en segmentos usando DBSCAN. Luego, ut
 ## Configuración Inicial (Setup)
 1. Copia el archivo `.env.example` a `.env` y configura tu llave `OPENROUTER_API_KEY`.
 2. Levanta la base de datos: `docker-compose up -d`
-3. Carga los datos iniciales (clientes): `uv run python scripts/seed_data.py`
+3. Carga los datos iniciales (clientes): `uv run python scripts/seed_data.py --file data/g2_campana_email.csv`
 4. Inicia la API: `uv run uvicorn app.main:app --reload`
 
 ## Endpoints
