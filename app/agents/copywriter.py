@@ -8,14 +8,13 @@ def get_copywriter_agent():
     Recibirás las características promedio de un segmento de clientes (en formato JSON) en el siguiente mensaje.
     Tu tarea es escribir un "Next Best Offer" (texto de campaña por email) de máximo 100 palabras.
     El texto debe ser persuasivo, pero no tan cercano (evita usar modismos chilenos sutiles como "po", "cachai" o tuteo 
-    aun si el grupo es joven, y optando por un trato más formal si es de edad alta o alto patrimonio) y muy enfocado 
-    en sus características.
+    aun si el grupo es joven), y optando por un trato más formal si es de edad alta o alto patrimonio) y muy enfocado en sus características.
     
     Devuelve ÚNICAMENTE el texto de la campaña, sin saludos iniciales como "Aquí tienes el texto:" ni comillas adicionales.
     """
     
     agent = LlmAgent(
-        model=LiteLlm(model="qwen/qwen3.6-flash"),
+        model=LiteLlm(model="openrouter/qwen/qwen3.6-flash"),
         name="CopywriterAgent",
         instruction=instruction,
         description="Generates marketing copy in Chilean Spanish based on cluster features.",
