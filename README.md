@@ -1,60 +1,60 @@
-# Smart Marketing Agent
+# Agente de Marketing Inteligente (Smart Marketing Agent)
 
-## Intro
-Marketing API. Clusters users with DBSCAN. Uses Claude 3.5 Sonnet (via OpenRouter & Google ADK) to write Chilean Spanish email copy per cluster.
+## Introducción
+API de marketing que agrupa a los clientes en segmentos usando DBSCAN. Luego, utiliza un agente de inteligencia artificial (mediante OpenRouter y Google ADK) para redactar campañas de correo electrónico enfocadas a cada perfil, escritas en español chileno con un tono formal y corporativo.
 
-## Stack
-- Python 3.11+ (uv)
-- FastAPI
-- PostgreSQL (Docker)
-- scikit-learn (DBSCAN)
-- Google ADK + LiteLLM
+## Stack Tecnológico
+- Python 3.11+ (gestión de dependencias con `uv`)
+- FastAPI (Backend)
+- PostgreSQL (Base de datos vía Docker)
+- scikit-learn (Algoritmo DBSCAN para clustering)
+- Google ADK + LiteLLM (Orquestación de IA)
 
-## Setup
-1. Copy `.env.example` to `.env`. Set `OPENROUTER_API_KEY`.
-2. Start DB: `docker-compose up -d`
-3. Seed DB: `uv run python scripts/seed_data.py`
-4. Run API: `uv run uvicorn app.main:app --reload`
+## Configuración Inicial (Setup)
+1. Copia el archivo `.env.example` a `.env` y configura tu llave `OPENROUTER_API_KEY`.
+2. Levanta la base de datos: `docker-compose up -d`
+3. Carga los datos iniciales (clientes): `uv run python scripts/seed_data.py`
+4. Inicia la API: `uv run uvicorn app.main:app --reload`
 
 ## Endpoints
-- `POST /api/v1/campaign/run`: Run DBSCAN and LLM agents.
-- `GET /api/v1/campaign/results`: View campaigns.
+- `POST /api/v1/campaign/run`: Ejecuta el clustering y gatilla los agentes LLM para generar nuevas campañas.
+- `GET /api/v1/campaign/results`: Visualiza los textos generados.
 
 ## Testing
-- `uv run pytest`
+- Para correr las pruebas unitarias: `uv run pytest`
 
 ---
 
 ## Runbook / Uso Práctico
 
-### 1. Consultas SQL Útiles (Ejecutables desde Terminal)
-Puedes auditar la base de datos directamente usando el contenedor de Docker sin necesidad de instalar DBeaver.
+### 1. Consultas SQL Útiles (Ejecutables desde la Terminal)
+Puedes auditar la base de datos directamente usando el contenedor de Docker, sin necesidad de instalar DBeaver o pgAdmin.
 
-**Ver los textos generados por la IA:**
+**Ver los textos generados por la Inteligencia Artificial:**
 ```bash
 docker exec -it adk-mailing-db psql -U marketing_user -d marketing_db -c "SELECT cluster_id, generated_text FROM campaign_copy;"
 ```
 
-**Ver el tamaño y características promedio de cada cluster:**
+**Ver el tamaño y las características promedio de cada cluster:**
 ```bash
 docker exec -it adk-mailing-db psql -U marketing_user -d marketing_db -c "SELECT id, customer_count, centroid_features FROM clusters_summary;"
 ```
 
-**Contar cuántos clientes hay en cada cluster:**
+**Contar cuántos clientes cayeron en cada cluster:**
 ```bash
 docker exec -it adk-mailing-db psql -U marketing_user -d marketing_db -c "SELECT cluster_id, COUNT(*) FROM customers GROUP BY cluster_id ORDER BY cluster_id;"
 ```
 
-### 2. Uso de la API FastAPI
-La forma más sencilla de ver los resultados es iniciar el servidor y usar tu navegador o `curl`.
+### 2. Uso de la API (FastAPI)
+La forma más expedita de revisar los resultados es levantar el servidor y consultar mediante el navegador o `curl`.
 
-1. **Inicia el servidor:**
+1. **Inicia el servidor local:**
    ```bash
    uv run uvicorn app.main:app --reload
    ```
 
 2. **Ver Resultados (Método GET):**
-   Abre tu navegador de internet y entra a:
+   Abre tu navegador web e ingresa a:
    👉 `http://localhost:8000/api/v1/campaign/results`
    
    O si prefieres usar la terminal:
@@ -62,8 +62,8 @@ La forma más sencilla de ver los resultados es iniciar el servidor y usar tu na
    curl -X GET "http://localhost:8000/api/v1/campaign/results"
    ```
 
-3. **Ejecutar todo el pipeline de nuevo (Método POST):**
-   *(Nota: Esto volverá a consumir tokens de OpenRouter)*
+3. **Ejecutar todo el pipeline desde cero (Método POST):**
+   *(Ojo: Esto recalcula los grupos y volverá a consumir tokens de la API de OpenRouter)*
    ```bash
    curl -X POST "http://localhost:8000/api/v1/campaign/run"
    ```
