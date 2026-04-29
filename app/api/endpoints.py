@@ -1,4 +1,5 @@
 from fastapi import APIRouter, HTTPException
+from fastapi.responses import PlainTextResponse
 from sqlalchemy import text
 from app.db.database import SessionLocal
 from app.services.clustering import ClusteringService
@@ -52,3 +53,12 @@ def get_campaign_results():
         raise HTTPException(status_code=500, detail=str(e))
     finally:
         db.close()
+
+@router.get("/campaign/results/text", response_class=PlainTextResponse)
+async def get_campaign_results_text():
+    try:
+        orchestrator_svc = OrchestratorService()
+        report = await orchestrator_svc.generate_report()
+        return report
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))

@@ -79,6 +79,28 @@ class OrchestratorService:
             db.rollback()
             print(f"Orchestration Error: {e}")
             raise
+    async def generate_report(self) -> str:
+        db = SessionLocal()
+        try:
+            query = text("""
+                SELECT c.cluster_id, c.generated_text, s.customer_count, s.centroid_features 
+                FROM campaign_copy c
+                JOIN clusters_summary s ON c.cluster_id = s.id
+                ORDER BY c.cluster_id
+            """)
+            results = db.execute(query).fetchall()
+            
+            report = "REPORTE DE CAMPAÑAS DE MARKETING\n"
+            report += "=" * 40 + "\n\n"
+            
+            for row in results:
+                report += f"CLUSTER {row[0]} ({row[2]} clientes)\n"
+                report += f"Características promedio: {row[3]}\n"
+                report += "-" * 40 + "\n"
+                report += f"{row[1]}\n"
+                report += "-" * 40 + "\n\n"
+            
+            return report
         finally:
             db.close()
 

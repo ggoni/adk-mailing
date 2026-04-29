@@ -1,3 +1,4 @@
+import os
 import asyncio
 from sqlalchemy import text
 from app.db.database import SessionLocal
@@ -37,6 +38,13 @@ async def main():
             print("-" * 40)
             print(row[3])
             print("-" * 40)
+        
+        # Guardar reporte en archivo de texto
+        report = await orch_svc.generate_report()
+        os.makedirs("outputs", exist_ok=True)
+        with open("outputs/ultimo_reporte.txt", "w") as f:
+            f.write(report)
+        print(f"\n📄 Reporte guardado en: outputs/ultimo_reporte.txt")
     finally:
         db.close()
 

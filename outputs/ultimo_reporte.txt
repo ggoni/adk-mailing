@@ -1,0 +1,21 @@
+REPORTE DE CAMPAÑAS DE MARKETING
+========================================
+
+CLUSTER 0 (48 clientes)
+Características promedio: {'edad': 42.791666666666664, 'tasa_credito_pct': 2.8977083333333336, 'oferta_credito_clp': 1303476.0833333333, 'ingreso_mensual_clp': 481415.3958333333, 'oferta_tc_limite_clp': 252933.29166666666, 'antiguedad_cuenta_meses': 13.479166666666666}
+----------------------------------------
+Estimado cliente, basado en su sólida trayectoria financiera, le ofrecemos una propuesta exclusiva. Acceda hoy a un crédito personal por 1.300.000 pesos, con una tasa preferencial del 2,90% mensual. Complementamos esta oportunidad con un cupo aprobado en su tarjeta de crédito por 300.000 pesos a la misma tasa reducida. Esta condición especial está reservada para perfiles con estabilidad comprobada que buscan optimizar su capital. Ingrese a nuestra aplicación o sucursal para activar sus beneficios ahora mismo.
+----------------------------------------
+
+CLUSTER 1 (5 clientes)
+Características promedio: {'edad': 46.2, 'tasa_credito_pct': 2.874, 'oferta_credito_clp': 1182042.6, 'ingreso_mensual_clp': 508033.2, 'oferta_tc_limite_clp': 241172.8, 'antiguedad_cuenta_meses': 54.434579439252346}
+----------------------------------------
+Estimado cliente, basándonos en su sólida trayectoria y estabilidad financiera, hemos preparado una propuesta exclusiva para potenciar su crecimiento actual. Aproveche hoy un crédito personal por $1.200.000 con una tasa preferente del 2,87%, diseñado para concretar sus proyectos con absoluta tranquilidad. Asimismo, habilitamos un cupo de $200.000 en su tarjeta para mayor flexibilidad en sus compromisos. Esta condición refleja el valor que otorgamos a nuestra relación comercial. Lo invitamos a revisar los detalles en su plataforma digital. Quedamos atentos a su consulta para formalizar esta oportunidad.
+----------------------------------------
+
+CLUSTER 2 (6 clientes)
+Características promedio: {'edad': 30.0, 'tasa_credito_pct': 2.9916666666666667, 'oferta_credito_clp': 1100528.6666666667, 'ingreso_mensual_clp': 538910.3333333334, 'oferta_tc_limite_clp': 250596.66666666666, 'antiguedad_cuenta_meses': 54.43457943925234}
+----------------------------------------
+Basado en su trayectoria y estabilidad económica, hemos diseñado una propuesta exclusiva para gestionar sus metas. Acceda a un crédito especial de hasta $1.100.000 con una tasa de interés preferencial del 2,99%. Además, activaremos un cupo adicional en su tarjeta por $300.000 para brindarle mayor flexibilidad en sus operaciones. Esta ventaja está vigente por tiempo limitado. Aproveche para optimizar su liquidez con condiciones ventajosas. Responda a este correo para iniciar el trámite y formalizar su solicitud.
+----------------------------------------
+
