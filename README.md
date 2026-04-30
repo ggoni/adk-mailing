@@ -10,6 +10,35 @@ API de marketing que agrupa a los clientes en segmentos usando DBSCAN. Luego, ut
 - scikit-learn (Algoritmo DBSCAN para clustering)
 - Google ADK + LiteLLM (Orquestación de IA)
 
+## Instalación
+
+### Prerrequisitos
+- Python 3.11 o superior
+- Docker y Docker Compose
+- `uv` (gestor de paquetes moderno para Python)
+
+### 1. Instalar `uv`
+Si no tienes `uv` instalado, ejecuta:
+```bash
+curl -LsSf https://astral.sh/uv/install.sh | sh
+```
+
+### 2. Clonar el repositorio
+```bash
+git clone <url-del-repo>
+cd adk-mailing
+```
+
+### 3. Crear entorno virtual e instalar dependencias
+```bash
+uv venv
+source .venv/bin/activate  # En macOS/Linux
+# o
+.venv\Scripts\activate     # En Windows
+
+uv sync
+```
+
 ## Configuración Inicial (Setup)
 1. Copia el archivo `.env.example` a `.env` y configura tu llave `OPENROUTER_API_KEY`.
 2. Levanta la base de datos: `docker-compose up -d`
